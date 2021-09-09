@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:validation="http://www.mulesoft.org/schema/mule/validation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="64d78921-beb9-421a-aeeb-2ba482717c16" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="a-hello-worldFlow" doc:id="55468f6c-68bd-431e-935a-03d2eedf3c4c" >
+		<http:listener doc:name="Listener" doc:id="e8332016-100d-4fa6-8ae9-b1b0cf5cfba0" config-ref="HTTP_Listener_config" path="/hai"/>
+		<logger level="INFO" doc:name="Logger" doc:id="de4594c4-5aa8-4eb4-83c8-b82d7a510b8f" message="---Flow Started ---"/>
+		<ee:transform doc:name="Transform Message" doc:id="4b7994c9-70bf-4f31-a1aa-24157807bbaa" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/csv
+---
+[{
+	sno: payload.sno default 0,
+	sname: payload.sname default "",
+	totMarks: (payload.m1 default 0) + (payload.m2 default 0)
+}]]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="c053b707-6dc1-41c2-89e5-e83c6874ff05" message="#[payload]"/>
+		<set-payload value="Hi All, Welcome to Mulesoft !!" doc:name="Set Payload" doc:id="b3ec0f16-6c38-46b6-a2ac-158e01698c5d" />
+		<set-payload value="Hi All, Welcome to Mulesoft AGAIN and AGAIN !!" doc:name="Set Payload" doc:id="8937b4ec-0511-4535-a86c-b09ecab67ef3" />
+		<logger level="INFO" doc:name="Logger" doc:id="7bbb2fcf-c082-4c29-9223-4c71e0ce5cc4" />
+	</flow>
+</mule>
