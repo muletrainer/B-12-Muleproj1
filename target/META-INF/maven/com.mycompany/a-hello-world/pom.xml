@@ -24,12 +24,32 @@
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.0.0</version>
 			</plugin>
+			
 			<plugin>
-				<groupId>org.mule.tools.maven</groupId>
-				<artifactId>mule-maven-plugin</artifactId>
-				<version>${mule.maven.plugin.version}</version>
-				<extensions>true</extensions>
+			      <groupId>org.mule.tools.maven</groupId>
+			      <artifactId>mule-maven-plugin</artifactId>
+			      <version>${mule.maven.plugin.version}</version>
+			     <extensions>true</extensions>
+			     <configuration>
+			           <cloudHubDeployment>
+			                 <uri>https://anypoint.mulesoft.com</uri>
+			                 <muleVersion>4.3.0</muleVersion>
+			                 <username>kish0821</username>
+			                 <password>Kish0821</password>
+			                 <applicationName>a-first-app-kish</applicationName>
+			                 <environment>Sandbox</environment>
+			                 <region>us-east-1</region>
+			                 <workers>1</workers>
+			                 <workerType>MICRO</workerType>
+			                 <properties>
+			                     <mykey>myvalue</mykey>
+			                 </properties>
+			                 <objectStoreV2>true</objectStoreV2>
+			              </cloudHubDeployment>
+			              
+			       </configuration>
 			</plugin>
+			
 		</plugins>
 	</build>
 

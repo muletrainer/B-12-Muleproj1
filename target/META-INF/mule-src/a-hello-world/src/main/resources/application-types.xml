@@ -30,18 +30,4 @@ type stud_csv = Array<{|  sno: String,   sname: String,   totMarks: String|}> {"
       </types:properties>
     </types:type>
   </types:catalog>
-  <types:enrichment select="#4b7994c9-70bf-4f31-a1aa-24157807bbaa">
-    <types:processor-declaration>
-      <types:input-event>
-        <types:message>
-          <types:payload type="students-csv"/>
-        </types:message>
-      </types:input-event>
-      <types:output-event>
-        <types:message>
-          <types:payload type="stud-csv"/>
-        </types:message>
-      </types:output-event>
-    </types:processor-declaration>
-  </types:enrichment>
 </types:mule>
